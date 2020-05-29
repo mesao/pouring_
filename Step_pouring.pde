@@ -42,8 +42,8 @@ void draw() {
   }
 
   amountLiquid = constrain(amountLiquid, 0, MAX_AMOUNT);
-amountPixels = map(amountLiquid, 0, MAX_AMOUNT, 0, height);
-  rect(0, height -amountPixels, width, amountPixels);
+  amountPixels = map(amountLiquid, 0, MAX_AMOUNT, 0, height);
+  rect(0, height -amountPixels -stepsDetected*5, width, amountPixels+stepsDetected*5);
   textSize(30 * displayDensity);
   //textAlign(CENTER, CENTER);
 
@@ -65,7 +65,7 @@ amountPixels = map(amountLiquid, 0, MAX_AMOUNT, 0, height);
 void onStepDetectorEvent() { // called on every step detected
   stepsDetected++;
   println("step " + stepsDetected);
-   println(amountPixels);
+  println(amountPixels);
 }
 
 void onStepCounterEvent(float s) { // s is the step count since device reboot, is called on new step
