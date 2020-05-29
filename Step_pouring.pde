@@ -9,6 +9,8 @@ int stepsDetected;
 float amountLiquid = MAX_AMOUNT;
 float drainAmount = 0.3;
 
+float balance=1;
+
 static float MAX_AMOUNT = 100;
 
 void setup() {
@@ -24,33 +26,29 @@ void draw() {
   background(255);
   //fill(#FFB4FB);
   noStroke();
-    fill(#FFB4FB);
+  fill(#FFB4FB);
 
   if (accelerometerY > 13) {
     refill();
   }
-  if (accelerometerX > 5) {
+
+
+  if (accelerometerX > balance || accelerometerX < -balance || accelerometerY > balance || accelerometerY < -balance) {
     // liquid is being poured
     amountLiquid -= drainAmount;
+    //soundPouring.play();
   }
-  if (accelerometerX < -5) {
-    // liquid is being poured
-    amountLiquid += drainAmount;
-    //if (!soundPouring.isPlaying()) {
-      //soundPouring.play();
-    //}
-  }
-  
+
   amountLiquid = constrain(amountLiquid, 0, MAX_AMOUNT);
   float amountPixels = map(amountLiquid, 0, MAX_AMOUNT, 0, height);
   rect(0, height -amountPixels, width, amountPixels);
-    textSize(30 * displayDensity);
+  textSize(30 * displayDensity);
   //textAlign(CENTER, CENTER);
-  
+
   fill(0);
   text(stepsDetected + "\n" + totalSteps, width/2, height/2);
-   
-  
+
+
   fill(0);
   textSize(30 * displayDensity);
   textAlign(CENTER, BOTTOM);
